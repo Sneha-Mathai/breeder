@@ -1,0 +1,165 @@
+{% extends 'common/customercommon.html' %}
+
+{% load static %} 
+{% block header %}
+{% for m in messages %}
+<script>
+alert('{{m}}')
+</script>
+    {% endfor %}
+<section class="inner-banner py-5">
+    <div class="w3l-breadcrumb py-lg-5">
+        <div class="container pt-4 pb-sm-4">
+            <h4 class="inner-text-title font-weight-bold pt-sm-5 pt-4">Chat Box</h4>
+            <ul class="breadcrumbs-custom-path">
+                <li><a href="index.html">Home</a></li>
+                <li class="active"><i class="fas fa-angle-right mx-2"></i>Chat Box</li>
+            </ul>
+        </div>
+    </div>
+    <div class="shape">
+        <svg xmlns="{% static 'http://www.w3.org/2000/svg' %}" viewBox="0 0 1440 280">
+            <path fill-opacity="1">
+                <animate attributeName="d" dur="20000ms" repeatCount="indefinite"
+                    values="M0,160L48,181.3C96,203,192,245,288,261.3C384,277,480,267,576,234.7C672,203,768,149,864,117.3C960,85,1056,75,1152,90.7C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z; M0,160L48,181.3C96,203,192,245,288,234.7C384,224,480,160,576,133.3C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;												 M0,64L48,74.7C96,85,192,107,288,133.3C384,160,480,192,576,170.7C672,149,768,75,864,80C960,85,1056,171,1152,181.3C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                                             M0,160L48,181.3C96,203,192,245,288,261.3C384,277,480,267,576,234.7C672,203,768,149,864,117.3C960,85,1056,75,1152,90.7C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;" />
+
+            </path>
+        </svg>
+    </div>
+</section>
+<style>
+    .mail {
+        padding: 50px 0;
+        background-color: #f5f5f5;
+    }
+
+    .mail h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    .mail-grids {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .mail-grid-left1 h3 {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .mail-grid-left1 input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        height: 44px;
+        background-color:#ccc;
+        font-family: Arial, sans-serif;
+        margin-bottom: 15px;
+    }
+
+    .mail-grid-left1 input[type="submit"] {
+        background-color: #ccc;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        border: none;
+        height: 20px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .chat-container {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        justify-content: flex-end;
+    }
+
+    .chat-box {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        margin-right: 10px;
+    
+    }
+    .message {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sender-name {
+        color: #0078D4; /* Replace with the desired color for the sender's name */
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .s-name {
+        color: #0078D4; /* Replace with the desired color for the sender's name */
+        font-weight: bold;
+        margin-bottom: 5px;
+margin-left: 500px;
+    }
+
+    .user-reply {
+        background-color: #b1ca78;
+    }
+
+    .clearfix {
+        clear: both;
+    }
+</style>
+
+<div class="mail">
+    <div class="container">
+        <center>
+            <h2 style="color: #000000; margin-bottom: 30px;">Chat box</h2>
+        </center>
+        <center>
+            <div class="mail-grids" style="width: 100% ">
+                <div class="col-md-6 mail-grid-left">
+                    <div class="mail-grid-left1">
+                        {% for data in res %}
+                        <div class="chat-container" style="display: flex;justify-content: flex-end; flex-direction: column; margin-bottom: 10px;">
+                            <div class="s-name">
+                                <p>you</p>
+                            </div>
+                            <div class="chat-box" style="min-width: 100px;align-self: flex-end; padding: 10px; border: 1px solid #ccc; border-radius: 10px; margin-left: 30px; background-color:rgb(54, 156, 156);  margin-bottom: 5px;">
+                                {{ data.message }}
+                            </div>
+                            {% if data.reply %}
+                            <div class="message">
+                                <div class="sender-name">
+                                    {{data.breeder.name}}
+                                </div>
+                            <div class="chat-box user-reply" style="min-width: 100px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;margin-right: 50px; background-color: #f2f2f2;">
+                                {{ data.reply }}</div></div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% for data in br %}
+                            <input type="hidden" name="id" value="{{data.id}}" style="color: #000000;">
+                            {% endfor %}
+                            <div class="chat-container">
+                                <input type="text" placeholder="Any queries" name="msg" required="" style="width: 800px; color: #000000; flex: 1;">
+                                <button type="submit" style="background-color: #ccc; padding: 10px 20px; font-size: 16px; color: #fff; border: none; cursor: pointer;">
+                                    <i class="fa fa-paper-plane" aria-hidden="true" style="color: #d90000;"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </center>
+    </div>
+</div>
+
+    {% endblock %}

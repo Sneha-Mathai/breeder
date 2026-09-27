@@ -1,0 +1,168 @@
+{% extends 'common/breedercommon.html' %}
+{% load static %} 
+{% block header %}
+{% for m in messages %}
+<script>
+alert('{{m}}')
+</script>
+    {% endfor %}
+<!-- <div class="banner-wrap">
+    <div class="banner-slider"> -->
+        <!-- hero slide start -->
+        <!-- <div class="banner-slide bg1">
+            <div class="container">
+                <div class="hero-content">
+                    <p class="mb-2">Pets Love </p>
+                    <h1>
+                        Make your dogs look their best</h1>
+                    <div class="cta-btn">
+                        <a href="about.html" class="btn btn-style btn-primary">View More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-overlay"></div>
+        </div> -->
+        <!-- hero slide end -->
+    <!-- </div>
+    <div class="shape">
+        <svg xmlns="{% static 'http://www.w3.org/2000/svg' %}" viewBox="0 0 1440 280">
+            <path fill-opacity="1">
+                <animate attributeName="d" dur="20000ms" repeatCount="indefinite"
+                    values="M0,160L48,181.3C96,203,192,245,288,261.3C384,277,480,267,576,234.7C672,203,768,149,864,117.3C960,85,1056,75,1152,90.7C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z; M0,160L48,181.3C96,203,192,245,288,234.7C384,224,480,160,576,133.3C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;												 M0,64L48,74.7C96,85,192,107,288,133.3C384,160,480,192,576,170.7C672,149,768,75,864,80C960,85,1056,171,1152,181.3C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                                             M0,160L48,181.3C96,203,192,245,288,261.3C384,277,480,267,576,234.7C672,203,768,149,864,117.3C960,85,1056,75,1152,90.7C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;" />
+
+            </path>
+        </svg>
+    </div>
+</div> -->
+<!-- hero slider end -->
+<section class="inner-banner py-5">
+    <div class="w3l-breadcrumb py-lg-5">
+        <div class="container pt-4 pb-sm-4">
+            <h4 class="inner-text-title font-weight-bold pt-sm-5 pt-4">Update Breeder Dog</h4>
+            <ul class="breadcrumbs-custom-path">
+                <li><a href="../breederhome">Home</a></li>
+                <li class="active"><i class="fas fa-angle-right mx-2"></i>Update Breeder Dog</li>
+            </ul>
+        </div>
+    </div>
+    <div class="shape">
+        <svg xmlns="{% static 'http://www.w3.org/2000/svg' %}" viewBox="0 0 1440 280">
+            <path fill-opacity="1">
+                <animate attributeName="d" dur="20000ms" repeatCount="indefinite"
+                    values="M0,160L48,181.3C96,203,192,245,288,261.3C384,277,480,267,576,234.7C672,203,768,149,864,117.3C960,85,1056,75,1152,90.7C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z; M0,160L48,181.3C96,203,192,245,288,234.7C384,224,480,160,576,133.3C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;												 M0,64L48,74.7C96,85,192,107,288,133.3C384,160,480,192,576,170.7C672,149,768,75,864,80C960,85,1056,171,1152,181.3C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;
+                                             M0,160L48,181.3C96,203,192,245,288,261.3C384,277,480,267,576,234.7C672,203,768,149,864,117.3C960,85,1056,75,1152,90.7C1248,107,1344,149,1392,170.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z;" />
+
+            </path>
+        </svg>
+    </div>
+</section>
+
+<style>
+    .registration-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .registration-form .form-input {
+        margin-bottom: 20px;
+    }
+
+    .registration-form input[type="text"],
+    .registration-form input[type="number"],
+    .registration-form select,
+    .registration-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+
+
+    .registration-form .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .registration-form .btn:hover {
+        background-color: #0069d9;
+    }
+</style>
+
+<div class="registration-form">
+    <form method="post" class="signin-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for data in qy %}
+        <div class="form-input">
+            <input type="text" name="name" id="dog_name" placeholder="Dog's name" value="{{data.name}}">
+        </div>
+        <label for="gender">Gender:</label>
+
+        <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>male
+        <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>female
+<br><br>
+        <div class="form-input">
+            <select name="breed" id="dog_breed">
+                <option value="" disabled selected>Select dog's breed</option>
+                <option value="German Shepherd">German Shepherd</option>
+                <option value="Pug">Pug</option>
+                <option value="Labrador Retriever">Labrador Retriever</option>
+                <option value="Bulldog">Bulldog</option>
+                <option value="Beagle">Beagle</option>
+                <option value="Boxer">Boxer</option>
+                <option value="Golden Retriever">Golden Retriever</option>
+                <option value="Dachshund">Dachshund</option>
+                <option value="Chihuahua">Chihuahua</option>
+                <option value="Siberian Husky">Siberian Husky</option>
+            </select>
+        </div>
+        <div class="form-input">
+            <input type="number" name="price" id="breeding_charge" placeholder="Breeding charge" value="{{data.price}}">
+        </div>
+
+                <label for="gender">Taking medication:</label>
+
+                <input class="form-check-input" type="radio" name="medication" id="male" value="yes" required>yes
+                <input class="form-check-input" type="radio" name="medication" id="female" value="no" required>no
+                <br><br>
+        <div class="form-input">
+            <input type="text" name="age" id="dog_age" placeholder="Dog's age" value="{{data.age}}">
+        </div>
+        <div class="form-input">
+            <input type="file" name="image" >
+        </div>
+        <div class="form-input">
+            <textarea name="description" id="dog_description" placeholder="Dog's description" rows="4">{{data.description}}</textarea>
+        </div>
+        <div class="form-input">
+            <input type="file" name="certificate" >
+        </div>{% endfor %}
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary" style="background-color: #dc3545;        padding: 10px 20px;
+            font-size: 16px;
+           
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+ ">Submit</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+{% endblock %}
