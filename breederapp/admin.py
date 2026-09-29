@@ -11,5 +11,5 @@ admin.site.register(Feedback)
 admin.site.register(Offspring)
 admin.site.register(Breeder)
 admin.site.register(Customer)
-admin.site.register(Veterinarian)
+#admin.site.register(Veterinarian)
 # Register your models here.

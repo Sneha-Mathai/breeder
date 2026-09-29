@@ -4,6 +4,9 @@ from datetime import date,datetime
 from django.contrib import messages
 from .models import *
 from django.db.models import F,Q
+from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import login as auth_login
+
 # Create your views here.
 def index(request):
     return render(request,'index.html')
@@ -16,6 +19,9 @@ def login(request):
         print(user)
         
         if user is not None:
+            auth_login(request, user)   # cycles the session key
+            request.session['uid'] = user.id
+            request.session['type'] = user.usertype
             if user.usertype == 'admin':
                 request.session['uid'] = user.id
                 request.session['type'] = 'admin'
@@ -514,122 +520,126 @@ def viewpayment(request):
     res=Breeding.objects.filter(status='end',breeder_id__user_id=uid)
     return render(request, 'breeder/viewpayment.html',{'res':res})
 
+def logout(request):
+    auth_logout(request)   # clears request.session entirely
+    return redirect('/index')
 
 
 
-def phyHome(request):
-    return render(request,"phyHome.html")
 
-def phyVDogs(request):
-    return render(request,"phyVDogs.html")
+# def phyHome(request):
+#     return render(request,"phyHome.html")
 
-def phyAddp(request):
-    if request.POST:
-        name = request.POST["name"]
-        price = request.POST["price"]
-        desc = request.POST["desc"]
-        img = request.FILES["img"]
-        p = Products.objects.create(name = name, price = price, desc = desc,img = img)
-        p.save()
-        messages.info(request,"Added successfully")
-    return render(request,"phyAddp.html")
+# def phyVDogs(request):
+#     return render(request,"phyVDogs.html")
 
-def phyVp(request):
-    data = Products.objects.all()
-    return render(request,"phyVp.html",{"data":data})
+# def phyAddp(request):
+#     if request.POST:
+#         name = request.POST["name"]
+#         price = request.POST["price"]
+#         desc = request.POST["desc"]
+#         img = request.FILES["img"]
+#         p = Products.objects.create(name = name, price = price, desc = desc,img = img)
+#         p.save()
+#         messages.info(request,"Added successfully")
+#     return render(request,"phyAddp.html")
 
-
-def pRem(request):
-    id = request.GET.get('id')
-    p = Products.objects.get(id=id).delete()
-    return redirect("/phyVp")
-
-def phyVOrders(request):
-    data = Cart.objects.all()
-    return render(request,"phyVOrders.html",{"data":data})
-
-def phyPayments(request):
-    data=Payment.objects.all()
-    return render(request,"phyVPayments.html",{"data":data})
+# def phyVp(request):
+#     data = Products.objects.all()
+#     return render(request,"phyVp.html",{"data":data})
 
 
-def cusCart(request):
-    uid = request.session["uid"]
-    data = Cart.objects.filter(Q(uid__user__id = uid) & Q(status = "inCart")).order_by("-id")
-    amt = 0
-    for d in data:
-        at = int(d.amt)
+# def pRem(request):
+#     id = request.GET.get('id')
+#     p = Products.objects.get(id=id).delete()
+#     return redirect("/phyVp")
 
-        print(at)
-        amt = int(amt) + int(at)
-    print(amt)
+# def phyVOrders(request):
+#     data = Cart.objects.all()
+#     return render(request,"phyVOrders.html",{"data":data})
 
-    return render(request,"cusCart.html",{"data":data,"amt":amt})
+# def phyPayments(request):
+#     data=Payment.objects.all()
+#     return render(request,"phyVPayments.html",{"data":data})
 
-def cusOrder(request):
-    id = request.session["uid"]
-    data = Cart.objects.filter(uid__user__id=id).order_by("-id")
-    return render(request,"cusOrder.html",{"data":data})
 
-def cusStore(request):
-    data =Products.objects.all()
-    uid = request.session["uid"]
-    u = Customer.objects.get(user__id=uid)
-    if request.POST:
-        qty = request.POST["qty"]
-        pid = request.POST["pid"]
-        p = Products.objects.get(id=pid)
-        qty = int(qty)
-        pr = int(p.price)
-        amt = pr * qty
-        c = Cart.objects.create(pid = p,uid = u,qty = qty,amt = amt,status = "inCart")
-        c.save()
-        messages.info(request,"Added to Cart")
+# def cusCart(request):
+#     uid = request.session["uid"]
+#     data = Cart.objects.filter(Q(uid__user__id = uid) & Q(status = "inCart")).order_by("-id")
+#     amt = 0
+#     for d in data:
+#         at = int(d.amt)
+
+#         print(at)
+#         amt = int(amt) + int(at)
+#     print(amt)
+
+#     return render(request,"cusCart.html",{"data":data,"amt":amt})
+
+# def cusOrder(request):
+#     id = request.session["uid"]
+#     data = Cart.objects.filter(uid__user__id=id).order_by("-id")
+#     return render(request,"cusOrder.html",{"data":data})
+
+# def cusStore(request):
+#     data =Products.objects.all()
+#     uid = request.session["uid"]
+#     u = Customer.objects.get(user__id=uid)
+#     if request.POST:
+#         qty = request.POST["qty"]
+#         pid = request.POST["pid"]
+#         p = Products.objects.get(id=pid)
+#         qty = int(qty)
+#         pr = int(p.price)
+#         amt = pr * qty
+#         c = Cart.objects.create(pid = p,uid = u,qty = qty,amt = amt,status = "inCart")
+#         c.save()
+#         messages.info(request,"Added to Cart")
         
-    return render(request,"cusStore.html",{"data":data})
+#     return render(request,"cusStore.html",{"data":data})
 
 
-def cartRem(request):
-    id = request.GET.get("id")
-    c = Cart.objects.get(id=id).delete()
-    return redirect("/cusCart")
+# def cartRem(request):
+#     id = request.GET.get("id")
+#     c = Cart.objects.get(id=id).delete()
+#     return redirect("/cusCart")
 
-def userpay(request):
+# def userpay(request):
 
-    amt = request.GET.get("amt")
-    if amt == 0:
-        messages.info(request, "Add items in the cart")
-        return redirect("/cusStore")
-    uid = request.session["uid"]
-    u = Customer.objects.get(user__id=uid)
-    if request.POST:
-        p = Payment.objects.create(uid = u,amt = amt)
-        p.save()
-        c = Cart.objects.filter(Q(uid__user__id=uid) & Q(status="inCart"))
-        for ci in c:
-            ci.status = "Completed"
-            ci.save()
-        return redirect("/cusOrder")
-    return render(request,"userpay.html",{"amt":amt})
+#     amt = request.GET.get("amt")
+#     if amt == 0:
+#         messages.info(request, "Add items in the cart")
+#         return redirect("/cusStore")
+#     uid = request.session["uid"]
+#     u = Customer.objects.get(user__id=uid)
+#     if request.POST:
+#         p = Payment.objects.create(uid = u,amt = amt)
+#         p.save()
+#         c = Cart.objects.filter(Q(uid__user__id=uid) & Q(status="inCart"))
+#         for ci in c:
+#             ci.status = "Completed"
+#             ci.save()
+#         return redirect("/cusOrder")
+#     return render(request,"userpay.html",{"amt":amt})
 
-def cusPayments(request):
-    id = request.session["uid"]
-    data = Payment.objects.filter(uid__user__id = id).order_by("-id")
-    return render(request,"cusPayments.html",{"data":data})
-def addvet(request):
-    if request.POST:
-            name = request.POST['name']
-            qualification= request.POST['degree']
-            clinic = request.POST['clinic']
-            contact = request.POST['phone']
-            exp = request.POST['experience']
-            vet=Veterinarian.objects.create(name=name,qualification=qualification,clinic=clinic,contact=contact,exp=exp)
-            vet.save()
+# def cusPayments(request):
+#     id = request.session["uid"]
+#     data = Payment.objects.filter(uid__user__id = id).order_by("-id")
+#     return render(request,"cusPayments.html",{"data":data})
+# def addvet(request):
+#     if request.POST:
+#             name = request.POST['name']
+#             qualification= request.POST['degree']
+#             clinic = request.POST['clinic']
+#             contact = request.POST['phone']
+#             exp = request.POST['experience']
+#             vet=Veterinarian.objects.create(name=name,qualification=qualification,clinic=clinic,contact=contact,exp=exp)
+#             vet.save()
             
-    return render(request,"admin/addvet.html")
+#     return render(request,"admin/addvet.html")
 
-def vetlist(request):
+# def vetlist(request):
 
-    v=Veterinarian.objects.all()
+#     v=Veterinarian.objects.all()
 
-    return render(request,"customer/vetlist.html",{'vet':v})
+#     return render(request,"customer/vetlist.html",{'vet':v})

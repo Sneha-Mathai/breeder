@@ -33,11 +33,12 @@ class Breederdog(models.Model):
     age=models.CharField(max_length=100,default=0)
     description=models.CharField(max_length=100)
     image=models.ImageField(upload_to="uploadimage",max_length=None,null=True)
+    Certificate = models.ImageField(null=True)
     price=models.CharField(max_length=100)
     status=models.CharField(max_length=100,default='pending')
     gender=models.CharField(max_length=100,default=0)
-    certificate=models.ImageField(upload_to="uploadimage",max_length=None,null=True)
     breeder=models.ForeignKey(Breeder,on_delete=models.CASCADE,null=True)
+    rating = models.IntegerField(null=True)
 class Customerdog(models.Model):
     name = models.CharField(max_length=255)
     breed = models.CharField(max_length=20)
@@ -45,9 +46,9 @@ class Customerdog(models.Model):
     age=models.CharField(max_length=100,default=0)
     description=models.CharField(max_length=100)
     image=models.ImageField(upload_to="uploadimage",max_length=None,null=True)
+    Certificate = models.ImageField(null=True,default=None)
     status=models.CharField(max_length=100,default='pending')
     gender=models.CharField(max_length=100,default=0)
-
     customer=models.ForeignKey(Customer,on_delete=models.CASCADE,null=True)
 
 class Breeding(models.Model):
@@ -89,31 +90,30 @@ class Feedback(models.Model):
     date = models.DateTimeField(auto_now_add=True,null=True)
 
 
-class Products(models.Model):
-    name = models.CharField(max_length=20)
-    price = models.CharField(max_length=20)
-    desc = models.CharField(max_length=20)
-    img = models.ImageField(null=True)
+# class Products(models.Model):
+#     name = models.CharField(max_length=20)
+#     price = models.CharField(max_length=20)
+#     desc = models.CharField(max_length=20)
+#     img = models.ImageField(null=True)
 
 
-class Cart(models.Model):
-    pid = models.ForeignKey(Products,on_delete=models.CASCADE)
-    uid = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    qty = models.IntegerField()
-    amt = models.IntegerField()
-    status = models.CharField(max_length=20)
+# class Cart(models.Model):
+#     pid = models.ForeignKey(Products,on_delete=models.CASCADE)
+#     uid = models.ForeignKey(Customer,on_delete=models.CASCADE)
+#     qty = models.IntegerField()
+#     amt = models.IntegerField()
+#     status = models.CharField(max_length=20)
 
 
-class Payment(models.Model):
-    uid = models.ForeignKey(Customer,on_delete=models.CASCADE)
-    amt = models.IntegerField()
-    date = models.DateField(auto_now_add=True)
+# class Payment(models.Model):
+#     uid = models.ForeignKey(Customer,on_delete=models.CASCADE)
+#     amt = models.IntegerField()
+#     date = models.DateField(auto_now_add=True)
     
-class Veterinarian(models.Model):
-    name=models.CharField(max_length=20)
-    qualification=models.CharField(max_length=20)
-    exp=models.IntegerField()
-    contact=models.CharField(max_length=40)
-    clinic=models.CharField(max_length=40)
+
     
     
+# class Rate(models.Model):
+#     uid=models.ForeignKey(Customer,on_delete=models.CASCADE,null=True)
+#     wid=models.ForeignKey(Breederdog,on_delete=models.CASCADE,null=True)
+#     rating=models.FloatField(null=True)
